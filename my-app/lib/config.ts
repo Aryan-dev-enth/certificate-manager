@@ -1,16 +1,16 @@
 // Configuration constants for the certificate management system
 export const CONFIG = {
   // Super admin email with delete privileges
-  SUPER_ADMIN_EMAIL: "admin@college.edu",
+  SUPER_ADMIN_EMAIL: "admin@srmuniversity.ac.in",
 
   // Allowed club accounts (email/password authentication)
   ALLOWED_ACCOUNTS: [
-    "admin@college.edu",
-    "sports@college.edu",
-    "cultural@college.edu",
-    "technical@college.edu",
-    "academic@college.edu",
-    "social@college.edu",
+    "admin@srmuniversity.ac.in",
+  "webytes@srmuniversity.ac.in",
+  "cyberzee@srmuniversity.ac.in",
+  "verge@srmuniversity.ac.in",
+  "xetech@srmuniversity.ac.in",
+  "ecell@srmuniversity.ac.in"
   ],
 
   // Export CSV column configuration
