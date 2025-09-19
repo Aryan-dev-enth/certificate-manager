@@ -50,8 +50,17 @@ export async function POST(request: NextRequest) {
       ipAddress: request.ip,
       userAgent: request.headers.get("user-agent") || undefined,
     })
+    
+    return NextResponse.json({
+  success: true,
+  user: {
+    email: user.email,
+    role: user.role,
+    isSuperAdmin: user.isSuperAdmin,
+  },
+  redirectTo: "/dashboard",
+})
 
-   return NextResponse.redirect(new URL("/dashboard", request.url))
   } catch (error) {
     console.error("Login error:", error)
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })

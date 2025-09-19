@@ -1,9 +1,8 @@
 "use client"
 
-import type React from "react"
-
-import { useState } from "react"
+import React, { useState } from "react"
 import { useRouter } from "next/navigation"
+import { useAuth } from "@/components/auth/auth-provider"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -16,6 +15,7 @@ export function LoginForm() {
   const [password, setPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
+  const { setUser } = useAuth()
   const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -26,21 +26,22 @@ export function LoginForm() {
     try {
       const response = await fetch("/api/auth/login", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       })
 
       const data = await response.json()
 
-      if (response.ok) {
+      if (response.ok && data.user) {
+        // Update context
+        setUser(data.user)
+        // Redirect to dashboard
         router.push("/dashboard")
-        router.refresh()
       } else {
         setError(data.error || "Login failed")
       }
-    } catch (error) {
+    } catch (err) {
+      console.error("Login error:", err)
       setError("Network error. Please try again.")
     } finally {
       setIsLoading(false)

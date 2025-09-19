@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useAuth } from "@/components/auth/auth-provider"
 import { MainLayout } from "./main-layout"
 import { useRouter } from "next/navigation"
@@ -25,7 +24,7 @@ export function ProtectedLayout({ children, requireSuperAdmin = false }: Protect
         router.push("/dashboard")
       }
     }
-  }, [user, isLoading, router, requireSuperAdmin])
+  }, [isLoading, user, requireSuperAdmin, router])
 
   if (isLoading) {
     return (
